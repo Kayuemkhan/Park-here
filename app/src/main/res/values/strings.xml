@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Park Here</string>
+    <string name="new_user_sign_here">New User?    <u>SIGN UP</u> Here</string>
+</resources>

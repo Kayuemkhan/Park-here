@@ -38,6 +38,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressDialog loadingBar1;
     DatabaseReference usersData ;
     DatabaseReference cash ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +65,7 @@ public class SignupActivity extends AppCompatActivity {
             loadingBar1.setMessage("Please Wait, While we are checking the credentials");
             loadingBar1.setCanceledOnTouchOutside(false);
             loadingBar1.show();
-            FirebaseUser user = mAuth.getCurrentUser();
-            HashMap<String,Object> usersdata= new HashMap<>();
-            usersdata.put("email",email);
-            usersdata.put("pass",pass);
-            String user2 = user.getUid();
-            usersData.child(user2).updateChildren(usersdata);
-            cash.child(user2).setValue("200");
+
             AllowAccssAccount(email, pass);
         }
     }
@@ -78,7 +73,13 @@ public class SignupActivity extends AppCompatActivity {
     private void AllowAccssAccount(String email, String pass) {
         mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-
+                FirebaseUser user = mAuth.getCurrentUser();
+                HashMap<String,Object> usersdata= new HashMap<>();
+                usersdata.put("email",email);
+                usersdata.put("pass",pass);
+                String user2 = user.getUid();
+                usersData.child(user2).updateChildren(usersdata);
+                cash.child(user2).setValue("200");
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 loadingBar1.dismiss();
                 finish();

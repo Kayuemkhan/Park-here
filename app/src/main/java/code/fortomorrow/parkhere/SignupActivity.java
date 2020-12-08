@@ -38,7 +38,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressDialog loadingBar1;
     DatabaseReference usersData ;
     DatabaseReference cash ;
-
+    int amount = 200;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,10 @@ public class SignupActivity extends AppCompatActivity {
                 usersdata.put("pass",pass);
                 String user2 = user.getUid();
                 usersData.child(user2).updateChildren(usersdata);
-                cash.child(user2).setValue("200");
+                HashMap<String, Object> cashammount = new HashMap<>();
+                cashammount.put("amount",amount);
+                cash.child(user2).updateChildren(cashammount);
+                //cash.child(user2).setValue("200");
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 loadingBar1.dismiss();
                 finish();

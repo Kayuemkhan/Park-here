@@ -3,4 +3,8 @@
     <string name="new_user_sign_here">New User?    <u>SIGN UP</u> Here</string>
     <string name="already_registered_login_here">Already Registered? <u>Login here</u> </string>
     <string name="please_choose_a_place_for_parking">Please, Choose a Place For Parking :</string>
+    <string name="dhaka">Dhaka \nPlaces : 3\nParking Loot : 6 \nRent Range: High </string>
+    <string name="chittagong">Chittagong \n Places : 2\n Parking Loot : 4 \n Rent Range: Medium </string>
+    <string name="rajshahi">Rajshahi \n Places : 2\n Parking Loot : 4 \n Rent Range: Low </string>
+    <string name="khulna">Khulna \n Places : 1\n Parking Loot : 2 \n Rent Range: Medium </string>
 </resources>

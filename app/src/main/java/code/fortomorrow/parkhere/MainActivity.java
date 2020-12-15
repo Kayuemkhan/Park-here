@@ -1,6 +1,7 @@
 package code.fortomorrow.parkhere;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -34,27 +35,18 @@ public class MainActivity extends AppCompatActivity {
     private String currentId = user.getUid();
     private RadioGroup radioGroup;
     String text;
-//    @BindView(R.id.nextButton)
-//    public Button nextButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         cashtext = FirebaseDatabase.getInstance().getReference().child("Cash").child(currentId);
         dataset();
         ButterKnife.bind(this);
-//        radioGroup = findViewById(R.id.radiogroup);
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @SuppressLint("ResourceType")
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton radioButton = group.findViewById(checkedId);
-//                if(radioButton !=null && checkedId > -1){
-//                     text = radioButton.getText().toString();
-//                }
-//            }
-//        });
+
+
     }
 
     private void dataset() {
@@ -77,13 +69,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//    @OnClick(R.id.nextButton)
-//    public void setNextButt(){
-//        if(text.equals("Dhaka")){
-//            startActivity(new Intent(getApplicationContext(),DhakaPlacesActivity.class));
-//            finish();
-//        }
-//    }
-
+    @OnClick(R.id.dhakaplace)
+    void dhakaplaceclick(){
+        startActivity(new Intent(getApplicationContext(),DhakaPlacesActivity.class));
+        finish();
+    }
+    @OnClick(R.id.chittagongplace)
+    void chittagongplaceclick(){
+        startActivity(new Intent(getApplicationContext(),ChittagongPlacesActivity.class));
+    }
+    @OnClick(R.id.khulnaplace)
+    void khulnaplaceclick(){
+        startActivity(new Intent(getApplicationContext(),KhulnaPlacesActivity.class));
+    }
+    @OnClick(R.id.rajshahiid)
+    void rajshahiPlaceclick(){
+        startActivity(new Intent(getApplicationContext(),RajshahiPlacesActivity.class));
+    }
 
 }

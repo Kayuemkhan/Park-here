@@ -11,7 +11,6 @@
    <LinearLayout
        android:padding="2dp"
        android:layout_margin="5dp"
-       android:background="@drawable/buttonbackgroung"
        android:layout_alignParentEnd="true"
        android:id="@+id/cash"
        android:layout_width="wrap_content"
@@ -19,20 +18,21 @@
        android:orientation="horizontal"
        android:gravity="end"
        >
+
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:layout_marginRight="20dp"
            android:layout_toLeftOf="@id/cashTextView"
            android:text="Credit : $"
-           android:layout_marginRight="20dp"
-           android:textSize="30sp"
            android:textColor="@color/white"
-           />
+           android:textSize="18sp" />
+
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:id="@+id/cashTextView"
-           android:textSize="30sp"
+           android:textSize="18sp"
            android:textColor="@color/white"
            />
 

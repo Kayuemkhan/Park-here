@@ -48,11 +48,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         cashtext = FirebaseDatabase.getInstance().getReference().child("Cash").child(currentId);
         dataset();
         ButterKnife.bind(this);
-
 
     }
 
@@ -79,28 +77,28 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.dhakaplace)
     void dhakaplaceclick(){
-        dhakaplace.setBackgroundColor(R.color.overlay_dark);
+
         startActivity(new Intent(getApplicationContext(),DhakaPlacesActivity.class));
         finish();
     }
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.chittagongplace)
     void chittagongplaceclick(){
-        chittagongplace.setBackgroundColor(R.color.overlay_dark);
+
         startActivity(new Intent(getApplicationContext(),ChittagongPlacesActivity.class));
         finish();
     }
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.khulnaplace)
     void khulnaplaceclick(){
-        khulnaPlace.setBackgroundColor(R.color.overlay_dark);
+
         startActivity(new Intent(getApplicationContext(),KhulnaPlacesActivity.class));
         finish();
     }
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.rajshahiid)
     void rajshahiPlaceclick(){
-        rajshahiId.setBackgroundColor(R.color.overlay_dark);
+
         startActivity(new Intent(getApplicationContext(),RajshahiPlacesActivity.class));
         finish();
     }

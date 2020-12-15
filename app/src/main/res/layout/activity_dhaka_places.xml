@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     tools:context=".DhakaPlacesActivity">
     <TextView
         android:layout_width="match_parent"
@@ -34,59 +35,92 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
         >
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Spots"
-            android:textSize="15sp"
-            android:textColor="@color/best2"
+            android:layout_marginTop="10dp"
+            android:padding="20sp"
+            android:background="@color/cardview_dark_background"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spots"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-thin"
+
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text=" 2 "
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/overlay_dark"
+                    android:text=" / 2 "
+
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
             />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="@color/cardview_dark_background"
+            android:padding="20dp"
+            android:orientation="vertical"
             >
             <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opening - Mon- Sun  "
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-thin"
+                />
+            <TextView
+                android:textColor="@color/white"
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total : 2"
-                android:textColor="@color/overlay_dark"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Available :"
+                android:text="09.00-7.00"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="@color/overlay_dark"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/overlay_dark"
-                android:text=" 2"
+                android:fontFamily="sans-serif-thin"
                 />
 
         </LinearLayout>
-
-
     </LinearLayout>
 
 </LinearLayout>

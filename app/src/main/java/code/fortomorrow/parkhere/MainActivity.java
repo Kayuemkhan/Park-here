@@ -77,14 +77,17 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.chittagongplace)
     void chittagongplaceclick(){
         startActivity(new Intent(getApplicationContext(),ChittagongPlacesActivity.class));
+        finish();
     }
     @OnClick(R.id.khulnaplace)
     void khulnaplaceclick(){
         startActivity(new Intent(getApplicationContext(),KhulnaPlacesActivity.class));
+        finish();
     }
     @OnClick(R.id.rajshahiid)
     void rajshahiPlaceclick(){
         startActivity(new Intent(getApplicationContext(),RajshahiPlacesActivity.class));
+        finish();
     }
 
 }

@@ -35,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
     private String currentId = user.getUid();
     private RadioGroup radioGroup;
     String text;
-
+    @BindView(R.id.dhakaplace)
+    public TextView dhakaplace;
+    @BindView(R.id.khulnaplace)
+    public TextView khulnaPlace;
+    @BindView(R.id.rajshahiid)
+    public TextView rajshahiId;
+    @BindView(R.id.chittagongplace)
+    public TextView chittagongplace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,23 +76,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @SuppressLint("ResourceAsColor")
     @OnClick(R.id.dhakaplace)
     void dhakaplaceclick(){
+        dhakaplace.setBackgroundColor(R.color.overlay_dark);
         startActivity(new Intent(getApplicationContext(),DhakaPlacesActivity.class));
         finish();
     }
+    @SuppressLint("ResourceAsColor")
     @OnClick(R.id.chittagongplace)
     void chittagongplaceclick(){
+        chittagongplace.setBackgroundColor(R.color.overlay_dark);
         startActivity(new Intent(getApplicationContext(),ChittagongPlacesActivity.class));
         finish();
     }
+    @SuppressLint("ResourceAsColor")
     @OnClick(R.id.khulnaplace)
     void khulnaplaceclick(){
+        khulnaPlace.setBackgroundColor(R.color.overlay_dark);
         startActivity(new Intent(getApplicationContext(),KhulnaPlacesActivity.class));
         finish();
     }
+    @SuppressLint("ResourceAsColor")
     @OnClick(R.id.rajshahiid)
     void rajshahiPlaceclick(){
+        rajshahiId.setBackgroundColor(R.color.overlay_dark);
         startActivity(new Intent(getApplicationContext(),RajshahiPlacesActivity.class));
         finish();
     }

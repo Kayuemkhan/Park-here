@@ -7,4 +7,7 @@
     <string name="chittagong">Chittagong \n Places : 2\n Parking Loot : 4 \n Rent Range: Medium </string>
     <string name="rajshahi">Rajshahi \n Places : 2\n Parking Loot : 4 \n Rent Range: Low </string>
     <string name="khulna">Khulna \n Places : 1\n Parking Loot : 2 \n Rent Range: Medium </string>
+    <string name="_1_hour">1 Hour\n $20</string>
+    <string name="_2_hour">2 Hour\n $40</string>
+    <string name="_3_hour">3 Hour\n $60</string>
 </resources>

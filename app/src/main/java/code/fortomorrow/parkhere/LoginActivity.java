@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.sign_up)
     TextView signUp;
     @BindView(R.id.emailET)
-    TextInputEditText emailET;
+    EditText emailET;
     @BindView(R.id.passwordET)
-    TextInputEditText passwordET;
+    EditText passwordET;
     private ProgressDialog loadingBar1;
     private FirebaseAuth mAuth;
     @BindView(R.id.login_button)

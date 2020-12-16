@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.7.0'
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
 }

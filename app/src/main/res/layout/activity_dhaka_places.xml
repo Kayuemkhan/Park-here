@@ -32,20 +32,18 @@
        android:weightSum="2"
        android:layout_height="wrap_content">
        <TextView
-           android:layout_weight="1"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="Cash:"
+           android:text="Credit : $"
            android:textColor="@color/best"
-           android:textSize="20sp"
-           />
+           android:textSize="18sp" />
+
        <TextView
-           android:layout_weight="1"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="200"
+           android:id="@+id/cashTextView2"
+           android:textSize="18sp"
            android:textColor="@color/best"
-           android:textSize="20sp"
            />
    </LinearLayout>
     <LinearLayout
@@ -99,6 +97,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/dhakaAvailablespots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -155,7 +154,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time"
+        android:text="Choose Your Time"
         android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="@color/best"
@@ -176,6 +175,7 @@
             android:background="@drawable/textviewbackgroung2"
             >
             <TextView
+                android:id="@+id/dhaka1hourRent"
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:layout_width="wrap_content"
@@ -199,6 +199,7 @@
             android:orientation="vertical"
             >
             <TextView
+                android:id="@+id/dhaka2hourRent"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,16 +221,17 @@
             android:padding="20dp"
             android:orientation="vertical"
             >
+
             <TextView
-                android:textColor="@color/white"
+                android:id="@+id/dhaka3hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_3_hour"
-                android:textSize="15sp"
-                android:textStyle="bold"
                 android:layout_gravity="center"
+                android:text="@string/_3_hour"
                 android:textAlignment="center"
-                />
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

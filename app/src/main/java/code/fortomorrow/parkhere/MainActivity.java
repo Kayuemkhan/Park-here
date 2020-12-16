@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         cashtext = FirebaseDatabase.getInstance().getReference().child("Cash").child(currentId);
         dataset();
         ButterKnife.bind(this);
-
+        SharedPref.init(this);
     }
 
     private void dataset() {
@@ -60,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     Cash cash = snapshot.getValue(Cash.class);
-                    //Log.d("error",cash.getAmount());
-                    cashTextview.setText(cash.getAmount().toString());
+                    String cashvalue= cash.getAmount().toString();
+                    SharedPref.write("cash",cashvalue);
+                    cashTextview.setText(cashvalue);
+//                    cashTextview.setText(SharedPref.read("cash",""));
                 }
                 else {
 
@@ -79,28 +82,28 @@ public class MainActivity extends AppCompatActivity {
     void dhakaplaceclick(){
 
         startActivity(new Intent(getApplicationContext(),DhakaPlacesActivity.class));
-        finish();
+
     }
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.chittagongplace)
     void chittagongplaceclick(){
 
         startActivity(new Intent(getApplicationContext(),ChittagongPlacesActivity.class));
-        finish();
+
     }
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.khulnaplace)
     void khulnaplaceclick(){
 
         startActivity(new Intent(getApplicationContext(),KhulnaPlacesActivity.class));
-        finish();
+
     }
     @SuppressLint("ResourceAsColor")
     @OnClick(R.id.rajshahiid)
     void rajshahiPlaceclick(){
 
         startActivity(new Intent(getApplicationContext(),RajshahiPlacesActivity.class));
-        finish();
+
     }
 
 }

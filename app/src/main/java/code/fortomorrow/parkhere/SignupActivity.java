@@ -36,8 +36,8 @@ public class SignupActivity extends AppCompatActivity {
     public Button signupButton;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar1;
-    DatabaseReference usersData ;
-    DatabaseReference cash ;
+    private DatabaseReference usersData ;
+    private DatabaseReference cash ;
     int amount = 200;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

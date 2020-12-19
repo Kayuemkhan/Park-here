@@ -53,10 +53,11 @@ public class MainActivity extends AppCompatActivity {
         dataset();
         ButterKnife.bind(this);
         SharedPref.init(this);
+
     }
 
     private void dataset() {
-        cashtext.addListenerForSingleValueEvent(new ValueEventListener() {
+        cashtext.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){

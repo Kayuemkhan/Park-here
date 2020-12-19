@@ -46,6 +46,8 @@ public class DhakaPlacesActivity extends AppCompatActivity {
     @BindView(R.id.release1hour)
     TextView release1hour;
     public static boolean isRentedInDhaka= false;
+    private String rentedHours;
+    private int availSpots =2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,10 @@ public class DhakaPlacesActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
                 }
                 else {
+                    availSpots -= 1;
+                    rentedHours = "1 Hour";
+                    dhakaAvailablespots.setText(String.valueOf(availSpots));
+                    dhakaselectedhour.setText(rentedHours);
                     isRentedInDhaka = true;
                     rent += 20;
                     String cashBefore = SharedPref.read("cash","");
@@ -87,6 +93,8 @@ public class DhakaPlacesActivity extends AppCompatActivity {
     }
     @OnClick(R.id.release1hour)
     public void release1Hour(){
+        availSpots +=1;
+        dhakaAvailablespots.setText(String.valueOf(availSpots));
         isRentedInDhaka = false;
         afterRent.setVisibility(View.INVISIBLE);
     }

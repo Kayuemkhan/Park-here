@@ -1,91 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:orientation="vertical"
     tools:context=".DhakaPlacesActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
         android:orientation="horizontal"
-        >
+        android:weightSum="2">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/app_name"
-            android:textStyle="bold"
-            android:textSize="25sp"
             android:textColor="@color/best"
-            />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:orientation="horizontal"
-       android:weightSum="2"
-       android:layout_height="wrap_content">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Credit : $"
-           android:textColor="@color/best"
-           android:textSize="18sp" />
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/cashTextView2"
-           android:textSize="18sp"
-           android:textColor="@color/best"
-           />
-   </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credit : $"
+            android:textColor="@color/best"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/cashTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/best"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_place_24"
-            />
+            android:src="@drawable/ic_baseline_place_24" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kallanpur, Dhaka"
-            />
+            android:text="Kallanpur, Dhaka" />
     </LinearLayout>
+
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
-        >
+        android:weightSum="2">
+
         <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:padding="20dp"
+            android:layout_weight="1"
             android:background="@drawable/textviewbackgroung2"
-            >
+            android:orientation="vertical"
+            android:padding="20dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Spots"
-                android:textSize="15sp"
-                android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed-light"
+                android:text="Spots"
+                android:textColor="@color/white"
+                android:textSize="15sp"
 
                 />
 
@@ -93,25 +94,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/dhakaAvailablespots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
                     android:text=" 2 "
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/overlay_dark"
                     android:text=" / 2 "
+                    android:textColor="@color/overlay_dark"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
 
                     />
 
@@ -119,108 +119,108 @@
 
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:background="@drawable/textviewbackgroung2"
-            android:padding="20dp"
             android:orientation="vertical"
-            >
+            android:padding="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Opening - Mon- Sun  "
-                android:textSize="15sp"
                 android:fontFamily="sans-serif-condensed-light"
-                />
-            <TextView
+                android:text="Opening - Mon- Sun  "
                 android:textColor="@color/white"
-                android:layout_marginLeft="20dp"
+                android:textSize="15sp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="09.00-7.00"
-                android:textStyle="bold"
-                android:textSize="20sp"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="sans-serif-thin"
-                />
+                android:text="09.00-7.00"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
+
     <TextView
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Choose Your Time"
-        android:textStyle="bold"
-        android:textSize="25sp"
         android:textColor="@color/best"
-        />
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
-        >
+        android:weightSum="3">
+
         <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:padding="20dp"
+            android:layout_weight="1"
             android:background="@drawable/textviewbackgroung2"
-            >
+            android:orientation="vertical"
+            android:padding="20dp">
+
             <TextView
                 android:id="@+id/dhaka1hourRent"
-                android:layout_gravity="center"
-                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/_1_hour"
-                android:textSize="15sp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold"
 
                 />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:background="@drawable/textviewbackgroung2"
-            android:padding="20dp"
             android:orientation="vertical"
-            >
+            android:padding="20dp">
+
             <TextView
                 android:id="@+id/dhaka2hourRent"
-                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_2_hour"
-                android:textSize="15sp"
-                android:textStyle="bold"
                 android:layout_gravity="center"
+                android:text="@string/_2_hour"
                 android:textAlignment="center"
-                />
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:background="@drawable/textviewbackgroung2"
-            android:padding="20dp"
             android:orientation="vertical"
-            >
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/dhaka3hourRent"
@@ -236,82 +236,83 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
-        android:padding="@dimen/_20sdp"
-        app:cardCornerRadius="@dimen/_2sdp"
         android:background="@color/cardview_light_background"
-        >
+        android:padding="@dimen/_20sdp"
+        app:cardCornerRadius="@dimen/_2sdp">
+
         <LinearLayout
+            android:id="@+id/afterRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/afterRent"
 
 
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
-                >
+                android:orientation="horizontal">
+
                 <TextView
-                    android:textSize="@dimen/_18sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="You have rent for"
                     android:textColor="@color/best2"
-                    />
+                    android:textSize="@dimen/_18sdp" />
+
                 <TextView
+                    android:id="@+id/dhakaselectedhour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/dhakaselectedhour"
                     android:text=" 1 Hour"
                     android:textColor="@color/best2"
-                    android:textSize="@dimen/_18sdp"
-                    />
+                    android:textSize="@dimen/_18sdp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/best"
                     android:text="Your time will be finish at :"
-                    />
+                    android:textColor="@color/best" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.00 PM"
-                    android:textColor="@color/best"
-                    />
+                    android:textColor="@color/best" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/release1hour"
-                android:layout_margin="@dimen/_5sdp"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Release"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/textviewbackgroung2"
-                />
+                android:padding="@dimen/_10sdp"
+                android:text="Release"
+                android:textColor="@color/white" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:text="Warning: Extra time will be added to your rent"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:text="Warning: Extra time will be added to your rent"
                 android:textAlignment="center"
-                />
+                android:textColor="@android:color/holo_red_dark" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

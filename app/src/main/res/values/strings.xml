@@ -10,4 +10,10 @@
     <string name="_1_hour">1 Hour\n $20</string>
     <string name="_2_hour">2 Hour\n $40</string>
     <string name="_3_hour">3 Hour\n $60</string>
+
+        <string-array name="places">
+            <item>Kallanpur</item>
+            <item>Mirpur</item>
+            <item>Nikonjo</item>
+        </string-array>
 </resources>

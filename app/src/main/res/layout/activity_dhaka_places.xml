@@ -10,8 +10,9 @@
     tools:context=".DhakaPlacesActivity">
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_50sdp"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -22,7 +23,14 @@
             android:text="@string/app_name"
             android:textColor="@color/best"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
+        <Spinner
+            android:padding="@dimen/_10sdp"
+            android:id="@+id/dhakaplacesSpinner"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -59,6 +67,7 @@
             android:src="@drawable/ic_baseline_place_24" />
 
         <TextView
+            android:id="@+id/selectedSpots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kallanpur, Dhaka" />
@@ -100,7 +109,7 @@
                     android:id="@+id/dhakaAvailablespots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 2 "
+                    android:text=" 3 "
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -108,7 +117,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" / 2 "
+                    android:text=" / 3 "
                     android:textColor="@color/overlay_dark"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -250,8 +259,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-
-
+            android:visibility="gone"
             >
 
             <LinearLayout
@@ -289,8 +297,9 @@
                     android:textColor="@color/best" />
 
                 <TextView
+                    android:id="@+id/dhakafinishTime"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="4.00 PM"
                     android:textColor="@color/best" />
             </LinearLayout>

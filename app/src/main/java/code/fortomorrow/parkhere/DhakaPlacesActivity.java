@@ -52,7 +52,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     TextView selectedSpot;
     public static boolean isRentedInDhaka= false;
     private String rentedHours;
-    private int availSpots =3;
+    private int availSpots = 2;
     private String selectedSpots ;
     String [] places = {"Kallanpur","Mirpur","Nikonjo"};
     private int rent = 0;
@@ -61,7 +61,8 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference cash;
-
+    String cashRunning;
+    int check;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,12 +80,17 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
         cashTextViewDhaka = findViewById(R.id.cashTextView2);
         cashTextViewDhaka.setText(SharedPref.read("cash",""));
         cash = FirebaseDatabase.getInstance().getReference().child("Cash");
+        cashRunning = SharedPref.read("cash","");
+        check = Integer.parseInt(cashRunning);
         dhaka1hourRent.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if(isRentedInDhaka == true){
                     Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
+                }
+                else  if(check <= 0 ){
+                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
                 }
                 else {
                     availSpots -= 1;
@@ -132,5 +138,36 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick(R.id.dhaka2hourRent)
+    public void setDhaka2HourRen(){
+        if(isRentedInDhaka == true){
+            Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
+        }
+        else {
+            availSpots -= 1;
+            rentedHours = "2 Hour";
+            dhakaAvailablespots.setText(String.valueOf(availSpots));
+            dhakaselectedhour.setText(" "+rentedHours);
+            isRentedInDhaka = true;
+            rent += 40;
+            String cashBefore = SharedPref.read("cash","");
+            cashnow = Integer.parseInt(cashBefore);
+            cash2= cashnow - rent;
+            String uid = firebaseUser.getUid();
+            SharedPref.write("cash",String.valueOf(cash2));
+            HashMap<String, Object> cashammount = new HashMap<>();
+            cashammount.put("amount",cash2);
+            cashTextViewDhaka.setText(String.valueOf(cash2));
+            rent=0;
+            cash.child(uid).updateChildren(cashammount);
+            afterRent.setVisibility(View.VISIBLE);
+            DateFormat dateFormat = new SimpleDateFormat("h:mm a");
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.HOUR_OF_DAY,1);
+            dhakafinishTime.setText(dateFormat.format(cal.getTime()));
+
+        }
     }
 }

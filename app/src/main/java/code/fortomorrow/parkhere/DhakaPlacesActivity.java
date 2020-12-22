@@ -89,7 +89,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
                 if(isRentedInDhaka == true){
                     Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
                 }
-                else  if(check <= 0 ){
+                else  if(check <= 0 || cash2 <=0 ){
                     Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -144,6 +144,9 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     public void setDhaka2HourRen(){
         if(isRentedInDhaka == true){
             Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
+        }
+        else  if(check <= 0 || cash2 <=0 ){
+            Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         }
         else {
             availSpots -= 1;

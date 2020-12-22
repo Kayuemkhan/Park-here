@@ -8,7 +8,9 @@ import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -64,6 +66,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     private DatabaseReference cash;
     String cashRunning;
     int check = 0;
+    private Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,11 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
         afterRent = findViewById(R.id.afterRent);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customtoast, null);
+         toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(view);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         cashTextViewDhaka = findViewById(R.id.cashTextView2);
@@ -88,11 +96,13 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View v) {
                 if(isRentedInDhaka == true){
-                    Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
+                    toast.show();
+//                    Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
                 }
                 else  if(check <= 0  ){
+                    toast.show();
                     Log.d("Rate",+check+" "+cashnow);
-                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
                 }
                 else {
 
@@ -150,7 +160,8 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
             Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
         }
         else  if(check < 40  ){
-            Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
+            toast.show();
+//            Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         }
         else {
             availSpots -= 1;
@@ -184,7 +195,8 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
             Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
         }
         else  if(check < 60 ){
-            Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
+            toast.show();
+//            Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         }
         else {
             availSpots -= 1;

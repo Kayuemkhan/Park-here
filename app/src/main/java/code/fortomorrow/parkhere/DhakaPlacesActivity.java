@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,13 +57,13 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     private String selectedSpots ;
     String [] places = {"Kallanpur","Mirpur","Nikonjo"};
     private int rent = 0;
-    private int cash2 ;
+    private int cash2 =0 ;
     int cashnow;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference cash;
     String cashRunning;
-    int check;
+    int check = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,10 +90,12 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
                 if(isRentedInDhaka == true){
                     Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
                 }
-                else  if(check <= 0 || cash2 <=0 ){
+                else  if(check <= 0  ){
+                    Log.d("Rate",+check+" "+cashnow);
                     Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
                 }
                 else {
+
                     availSpots -= 1;
                     rentedHours = "1 Hour";
                     dhakaAvailablespots.setText(String.valueOf(availSpots));
@@ -114,6 +117,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
                     Calendar cal = Calendar.getInstance();
                     cal.add(Calendar.HOUR_OF_DAY,1);
                     dhakafinishTime.setText(dateFormat.format(cal.getTime()));
+                    check = cash2;
 
                 }
 
@@ -145,7 +149,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
         if(isRentedInDhaka == true){
             Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
         }
-        else  if(check <= 0 || cash2 <=0 ){
+        else  if(check < 40  ){
             Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         }
         else {
@@ -170,7 +174,41 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.HOUR_OF_DAY,1);
             dhakafinishTime.setText(dateFormat.format(cal.getTime()));
-
+            check = cash2;
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick(R.id.dhaka3hourRent)
+    public void setDhaka3HourRan(){
+        if(isRentedInDhaka == true){
+            Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
+        }
+        else  if(check < 60 ){
+            Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
+        }
+        else {
+            availSpots -= 1;
+            rentedHours = "6 Hour";
+            dhakaAvailablespots.setText(String.valueOf(availSpots));
+            dhakaselectedhour.setText(" "+rentedHours);
+            isRentedInDhaka = true;
+            rent += 40;
+            String cashBefore = SharedPref.read("cash","");
+            cashnow = Integer.parseInt(cashBefore);
+            cash2= cashnow - rent;
+            String uid = firebaseUser.getUid();
+            SharedPref.write("cash",String.valueOf(cash2));
+            HashMap<String, Object> cashammount = new HashMap<>();
+            cashammount.put("amount",cash2);
+            cashTextViewDhaka.setText(String.valueOf(cash2));
+            rent=0;
+            cash.child(uid).updateChildren(cashammount);
+            afterRent.setVisibility(View.VISIBLE);
+            DateFormat dateFormat = new SimpleDateFormat("h:mm a");
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.HOUR_OF_DAY,1);
+            dhakafinishTime.setText(dateFormat.format(cal.getTime()));
+            check = cash2;
         }
     }
 }

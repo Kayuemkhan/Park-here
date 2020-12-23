@@ -23,6 +23,12 @@
             android:textColor="@color/best"
             android:textSize="25sp"
             android:textStyle="bold" />
+        <Spinner
+            android:padding="@dimen/_10sdp"
+            android:id="@+id/chittagongplacesSpinner"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -40,7 +46,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/cashTextView2"
+            android:id="@+id/cashTextViewForChittagong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/best"
@@ -97,6 +103,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/chittagongAvailablespots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 2 "
@@ -175,6 +182,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/chittagong1hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -198,6 +206,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/chittagong2hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -220,6 +229,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/chittagong3hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -263,7 +273,7 @@
                     android:textSize="@dimen/_18sdp" />
 
                 <TextView
-                    android:id="@+id/dhakaselectedhour"
+                    android:id="@+id/chittagongselectedhour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 1 Hour"
@@ -284,6 +294,7 @@
                     android:textColor="@color/best" />
 
                 <TextView
+                    android:id="@+id/chittagongfinishTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.00 PM"
@@ -291,6 +302,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/chittagongrelease1hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

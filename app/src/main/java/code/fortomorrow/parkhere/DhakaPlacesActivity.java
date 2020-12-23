@@ -53,19 +53,20 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
     TextView dhakafinishTime;
     @BindView(R.id.selectedSpots)
     TextView selectedSpot;
+
     public static boolean isRentedInDhaka= false;
     private String rentedHours;
     private int availSpots = 2;
     private String selectedSpots ;
-    String [] places = {"Kallanpur","Mirpur","Nikonjo"};
+    private String [] places = {"Kallanpur","Mirpur","Nikonjo"};
     private int rent = 0;
     private int cash2 =0 ;
-    int cashnow;
+    private int cashnow;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference cash;
-    String cashRunning;
-    int check = 0;
+    private String cashRunning;
+    private int check = 0;
     private Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,6 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
         afterRent = findViewById(R.id.afterRent);
-        LayoutInflater inflater = getLayoutInflater();
         View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customtoast, null);
          toast = new Toast(getApplicationContext());
         toast.setDuration(Toast.LENGTH_LONG);

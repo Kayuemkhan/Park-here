@@ -74,7 +74,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
         setContentView(R.layout.activity_dhaka_places);
         SharedPref.init(this);
         ButterKnife.bind(this);
-        Spinner spin = (Spinner) findViewById(R.id.dhakaplacesSpinner);
+        Spinner spin =  findViewById(R.id.dhakaplacesSpinner);
         spin.setOnItemSelectedListener(this);
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,places);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

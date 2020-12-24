@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ChittagongPlacesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ChittagongPlacesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     @BindView(R.id.cashTextViewForChittagong)
     TextView cashTextviewForChittagong;
     @BindView(R.id.chittagongAvailablespots)
@@ -71,7 +71,7 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
         ButterKnife.bind(this);
         SharedPref.init(this);
         spin = findViewById(R.id.chittagongplacesSpinner);
-        spin.setOnItemClickListener(this);
+        spin.setOnItemSelectedListener(ChittagongPlacesActivity.this);
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, places);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
@@ -92,7 +92,6 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             @Override
             public void onClick(View v) {
                 if (DhakaPlacesActivity.isRentedInDhaka == true) {
-
                     Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
                 } else if (check <= 0) {
                     toast.show();
@@ -135,13 +134,13 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
         if (DhakaPlacesActivity.isRentedInDhaka == true) {
             toast.show();
 //                    Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
-        } else if (check <= 0) {
+        } else if (check < 40) {
             toast.show();
             Log.d("Rate", +check + " " + cashnow);
 //                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         } else {
             availSpots -= 1;
-            rentedHours = "12 Hour";
+            rentedHours = "2 Hour";
             chittagongAvailablespots.setText(String.valueOf(availSpots));
             chittagongselectedhour.setText(" " + rentedHours);
             DhakaPlacesActivity.isRentedInDhaka = true;
@@ -159,7 +158,7 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             chittagongafterRentshow.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 1);
+            cal.add(Calendar.HOUR_OF_DAY, 2);
             chittagongfinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
 
@@ -172,17 +171,17 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
         if (DhakaPlacesActivity.isRentedInDhaka == true) {
             toast.show();
 //                    Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
-        } else if (check <= 0) {
+        } else if (check < 60) {
             toast.show();
             Log.d("Rate", +check + " " + cashnow);
 //                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         } else {
             availSpots -= 1;
-            rentedHours = "12 Hour";
+            rentedHours = "3 Hour";
             chittagongAvailablespots.setText(String.valueOf(availSpots));
             chittagongselectedhour.setText(" " + rentedHours);
             DhakaPlacesActivity.isRentedInDhaka = true;
-            rent += 40;
+            rent += 60;
             String cashBefore = SharedPref.read("cash", "");
             cashnow = Integer.parseInt(cashBefore);
             cash2 = cashnow - rent;
@@ -196,7 +195,7 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             chittagongafterRentshow.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 1);
+            cal.add(Calendar.HOUR_OF_DAY, 3);
             chittagongfinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
         }
@@ -209,9 +208,15 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             chittagongafterRentshow.setVisibility(View.INVISIBLE);
         }
 
-        @Override
-        public void onItemClick (AdapterView < ? > parent, View view,int position, long id){
-            selectedSpots = places[position];
-            selectedspotinchittagong.setText(selectedSpots);
-        }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedSpots = places[position];
+        selectedspotinchittagong.setText(selectedSpots.toString());
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}

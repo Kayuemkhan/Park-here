@@ -24,6 +24,11 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
+        <Spinner
+            android:id="@+id/khulnaplacesSpinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +45,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/cashTextView2"
+            android:id="@+id/cashTextViewForKhulna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/best"
@@ -59,6 +64,7 @@
             android:src="@drawable/ic_baseline_place_24" />
 
         <TextView
+            android:id="@+id/selectedspotinkhulna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bagherhat" />
@@ -97,6 +103,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/khulnaplaceAvailablespots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 2 "
@@ -175,6 +182,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/khulna1hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -182,9 +190,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                android:textStyle="bold"
-
-                />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -198,6 +204,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/khulna2hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -220,6 +227,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/khulna3hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -241,11 +249,11 @@
         app:cardCornerRadius="@dimen/_2sdp">
 
         <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/khulnaafterRentshow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -261,7 +269,7 @@
                     android:textSize="@dimen/_18sdp" />
 
                 <TextView
-                    android:id="@+id/dhakaselectedhour"
+                    android:id="@+id/khulnaselectedhour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 1 Hour"
@@ -282,6 +290,7 @@
                     android:textColor="@color/best" />
 
                 <TextView
+                    android:id="@+id/khulnafinishTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.00 PM"
@@ -289,6 +298,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/khulna1hourRelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

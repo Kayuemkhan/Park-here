@@ -10,9 +10,9 @@
     tools:context=".DhakaPlacesActivity">
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -23,14 +23,14 @@
             android:text="@string/app_name"
             android:textColor="@color/best"
             android:textSize="25sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <Spinner
-            android:padding="@dimen/_10sdp"
             android:id="@+id/dhakaplacesSpinner"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:padding="@dimen/_10sdp" />
 
     </LinearLayout>
 

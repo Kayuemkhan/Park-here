@@ -92,7 +92,7 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             @Override
             public void onClick(View v) {
                 if (DhakaPlacesActivity.isRentedInDhaka == true) {
-                    Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
                 } else if (check <= 0) {
                     toast.show();
                     Log.d("Rate", +check + " " + cashnow);
@@ -200,13 +200,14 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             check = cash2;
         }
     }
-        @OnClick(R.id.chittagongrelease1hour)
-        public void release1Hour () {
-            availSpots += 1;
-            chittagongAvailablespots.setText(String.valueOf(availSpots));
-            DhakaPlacesActivity.isRentedInDhaka = false;
-            chittagongafterRentshow.setVisibility(View.INVISIBLE);
-        }
+
+    @OnClick(R.id.chittagongrelease1hour)
+    public void release1Hour() {
+        availSpots += 1;
+        chittagongAvailablespots.setText(String.valueOf(availSpots));
+        DhakaPlacesActivity.isRentedInDhaka = false;
+        chittagongafterRentshow.setVisibility(View.INVISIBLE);
+    }
 
 
     @Override

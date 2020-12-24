@@ -23,12 +23,13 @@
             android:textColor="@color/best"
             android:textSize="25sp"
             android:textStyle="bold" />
+
         <Spinner
-            android:padding="@dimen/_10sdp"
             android:id="@+id/chittagongplacesSpinner"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:padding="@dimen/_10sdp" />
 
     </LinearLayout>
 
@@ -254,12 +255,11 @@
         >
 
         <LinearLayout
+            android:id="@+id/chittagongafterRentshow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/chittagongafterRentshow"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

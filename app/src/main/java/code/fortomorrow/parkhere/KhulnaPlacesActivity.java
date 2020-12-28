@@ -211,7 +211,8 @@ public class KhulnaPlacesActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        selectedSpots = places[position];
+        selectedspotinkhulna.setText(selectedSpots.toString());
     }
 
     @Override

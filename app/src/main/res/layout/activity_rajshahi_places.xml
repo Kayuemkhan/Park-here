@@ -67,7 +67,7 @@
             android:id="@+id/selectedspotinRajshahi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RUET campas" />
+            android:text="RUET Campus" />
     </LinearLayout>
 
     <LinearLayout
@@ -182,7 +182,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/khulna1hourRent"
+                android:id="@+id/rajshahi1hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -206,7 +206,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/khulna2hourRent"
+                android:id="@+id/rajsahhi2hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -229,7 +229,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/khulna3hourRent"
+                android:id="@+id/rajshahi3hourRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -251,10 +251,12 @@
         app:cardCornerRadius="@dimen/_2sdp">
 
         <LinearLayout
+            android:id="@+id/rajshahiafterrentShow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="invisible"
+
             >
 
             <LinearLayout

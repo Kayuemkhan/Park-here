@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ParkHere">
-        <activity android:name=".RajshahiPlacesActivity"></activity>
-        <activity android:name=".KhulnaPlacesActivity" />
-        <activity android:name=".ChittagongPlacesActivity" />
-        <activity android:name=".DhakaPlacesActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".RajshahiPlacesActivity" />
+        <activity android:name=".KhulnaPlacesActivity" />
+        <activity android:name=".ChittagongPlacesActivity" />
+        <activity android:name=".DhakaPlacesActivity" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".LoginActivity">
         </activity>
         <activity android:name=".MainActivity" />
 

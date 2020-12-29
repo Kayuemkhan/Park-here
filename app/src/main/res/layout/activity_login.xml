@@ -4,27 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/gradiantcolorbackground"
     tools:context="LoginActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:padding="@dimen/_10sdp"
-        android:src="@mipmap/park_here_foreground" />
-
+        android:id="@+id/backfromlogin"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_40sdp"
+        android:gravity="center"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:text="Hello"
+            android:textColor="#32c0b9"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:text="Login first to continue"
+            android:textColor="#000"
+            android:textSize="@dimen/_20sdp"
+            />
 
         <EditText
             android:id="@+id/emailET"
@@ -42,7 +58,7 @@
             android:id="@+id/passwordET"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
             android:background="@drawable/border_black"
             android:drawableEnd="@drawable/ic_baseline_vpn_key_24"
             android:hint="Password"
@@ -55,11 +71,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_gravity="center"
-            android:background="@drawable/buttonbackgroung"
+            android:background="@drawable/gradiantcolorbackground"
             android:text="Login"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -77,7 +93,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/new_user_sign_here"
-            android:textColor="@color/best"
+            android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
 </LinearLayout>

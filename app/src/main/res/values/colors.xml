@@ -9,6 +9,6 @@
     <color name="overlay_dark">#8F8C8C</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white2">#C1FFFFFF</color>
-    <color name="best">#1B2631</color>
-    <color name="best2">#141C26</color>
+    <color name="best2">#17b7bd</color>
+    <color name="best">#79dd9d</color>
 </resources>

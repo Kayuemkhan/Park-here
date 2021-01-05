@@ -183,7 +183,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
             afterRent.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY,1);
+            cal.add(Calendar.HOUR_OF_DAY,2);
             dhakafinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
         }
@@ -218,7 +218,7 @@ public class DhakaPlacesActivity extends AppCompatActivity implements AdapterVie
             afterRent.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY,1);
+            cal.add(Calendar.HOUR_OF_DAY,3);
             dhakafinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
         }

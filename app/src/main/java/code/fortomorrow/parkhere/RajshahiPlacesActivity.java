@@ -194,7 +194,7 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
             rajshahiafterRentshow.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 2);
+            cal.add(Calendar.HOUR_OF_DAY, 3);
             rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
 

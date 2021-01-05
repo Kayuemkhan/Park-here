@@ -104,6 +104,6 @@ public class SignupActivity extends AppCompatActivity {
     }
     @OnClick(R.id.sign_in_back)
     public void signup(){
-        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        startActivity(new Intent(getApplicationContext(),LaunchActivity.class));
     }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradiantcolorbackground"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".LaunchActivity">
+
+    <ImageView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@mipmap/park_here_foreground"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="Welcome"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:text="@string/easiest"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/login_buttoninlaunch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/buttonbackgroungwhite"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="#19b8BC"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/register_buttonlaunch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:background="@drawable/buttonbackgroungonlystroke"
+            android:gravity="center"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terms and Services"
+            android:textAlignment="center"
+            android:textColor="@color/white2"
+
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

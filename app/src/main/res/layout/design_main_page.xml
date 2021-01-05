@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="40dp"
     android:padding="10dp"
+    android:background="@drawable/gradiantcolorbackground"
     app:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -25,11 +26,11 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/textviewbackgroung"
+                android:background="@drawable/gradiantcolorbackground"
                 android:fontFamily="@font/abel"
                 android:gravity="center"
                 android:text="@string/dhaka"
-                android:textColor="@color/overlay_dark"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -38,11 +39,11 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/textviewbackgroung"
+                android:background="@drawable/gradiantcolorbackground"
                 android:fontFamily="@font/abel"
                 android:gravity="center"
                 android:text="@string/chittagong"
-                android:textColor="@color/overlay_dark"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
 
@@ -60,11 +61,11 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/textviewbackgroung"
+                android:background="@drawable/gradiantcolorbackground"
                 android:fontFamily="@font/abel"
                 android:gravity="center"
                 android:text="@string/khulna"
-                android:textColor="@color/overlay_dark"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -73,11 +74,11 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/textviewbackgroung"
+                android:background="@drawable/gradiantcolorbackground"
                 android:fontFamily="@font/abel"
                 android:gravity="center"
                 android:text="@string/rajshahi"
-                android:textColor="@color/overlay_dark"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
 

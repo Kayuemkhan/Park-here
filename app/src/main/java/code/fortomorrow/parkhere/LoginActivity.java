@@ -95,5 +95,9 @@ public class LoginActivity extends AppCompatActivity {
     public void signup(){
         startActivity(new Intent(getApplicationContext(),SignupActivity.class));
     }
+    @OnClick(R.id.backfromlogin)
+    public void backfromlogin(){
+        startActivity(new Intent(getApplicationContext(),LaunchActivity.class));
+    }
 
 }

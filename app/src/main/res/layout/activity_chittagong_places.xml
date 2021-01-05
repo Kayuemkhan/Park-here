@@ -7,6 +7,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:orientation="vertical"
+
     tools:context=".ChittagongPlacesActivity">
 
     <LinearLayout
@@ -84,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textviewbackgroung2"
+            android:background="@drawable/gradiantcolorbackground"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -134,7 +135,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textviewbackgroung2"
+            android:background="@drawable/gradiantcolorbackground"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -179,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textviewbackgroung2"
+            android:background="@drawable/gradiantcolorbackground"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -203,7 +204,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textviewbackgroung2"
+            android:background="@drawable/gradiantcolorbackground"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -226,7 +227,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textviewbackgroung2"
+            android:background="@drawable/gradiantcolorbackground"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -259,7 +260,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -309,7 +311,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/textviewbackgroung2"
+                android:background="@drawable/gradiantcolorbackground"
                 android:padding="@dimen/_10sdp"
                 android:text="Release"
                 android:textColor="@color/white" />

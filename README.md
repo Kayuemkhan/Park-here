@@ -2,13 +2,14 @@
 ## PARK HERE
 
 ### Parking made easy
-Parking Here is an Android Application to help people finding parking slot and parking cars.
+Park Here is an Android Application to help people finding parking slot and parking cars.
+
 ### Features:
-1. Sign In, Sign UP ( Firebase)
+1. Sign In, Sign Up (Firebase)
 2. Finding parking Lot
 3. Rent a Parking place
 
-### Here's some overview of works: 
+### Here's some overview of the app: 
 <img width=300 src="https://i.imgur.com/gD84DUE.png"> <img width=300 src="https://i.imgur.com/ZYvGLlo.png"> <br>
 <img width=300 src="https://i.imgur.com/2PmbnMw.png"> <img width=300 src="https://i.imgur.com/HGmqORg.png">
 

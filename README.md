@@ -1,5 +1,5 @@
 
-## PARK HERE
+## PARK HERE ![](https://img.shields.io/badge/Platform-Android-green) ![](https://img.shields.io/badge/Made%20with-JAVA-orange)
 
 ### Parking made easy
 Park Here is an Android Application to help people finding parking slot and parking cars.

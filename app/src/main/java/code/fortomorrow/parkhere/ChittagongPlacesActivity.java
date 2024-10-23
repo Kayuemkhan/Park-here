@@ -91,7 +91,7 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                if (DhakaPlacesActivity.isRentedInDhaka == true) {
+                if (DhakaPlacesActivity.isRentedInDhaka) {
                     Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
                 } else if (check <= 0) {
                     toast.show();
@@ -168,7 +168,7 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
     @RequiresApi(api = Build.VERSION_CODES.N)
     @OnClick(R.id.chittagong3hourRent)
     public void setChittagong3hourRen() {
-        if (DhakaPlacesActivity.isRentedInDhaka == true) {
+        if (DhakaPlacesActivity.isRentedInDhaka) {
             toast.show();
 //                    Toast.makeText(getApplicationContext(),"You Have Already Rent a slot",Toast.LENGTH_LONG).show();
         } else if (check < 60) {

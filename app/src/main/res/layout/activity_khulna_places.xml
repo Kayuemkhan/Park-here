@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Credit : $"
+            android:text="Credit : ৳"
             android:textColor="@color/best"
             android:textSize="18sp" />
 

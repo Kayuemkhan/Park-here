@@ -18,183 +18,141 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
-
 public class KhulnaPlacesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    LinearLayout khulnaafterRentshow;
-    private String rentedHours;
-    private int availSpots = 2;
+  LinearLayout khulnaafterRentshow;
+  private String rentedHours;
+  private int availSpots = 2;
   private final String[] places = {"Bagherhat", "Lalon Shah's Mazaar", "Sat Gumbad Mosque"};
-    private int rent = 0;
-    private int cash2 = 0;
-    private int cashnow;
+  private int rent = 0;
+  private int cash2 = 0;
+  private int cashnow;
   private FirebaseUser firebaseUser;
-    private DatabaseReference cash;
+  private DatabaseReference cash;
   private int check = 0;
-    private Toast toast;
+  private Toast toast;
   ActivityKhulnaPlacesBinding binding;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityKhulnaPlacesBinding.inflate(getLayoutInflater());
-      View view = binding.getRoot();
 
-      setContentView(view);
-      SharedPref.init(this);
-      Spinner spin = findViewById(R.id.khulnaplacesSpinner);
-        spin.setOnItemSelectedListener(KhulnaPlacesActivity.this);
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, places);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
-        khulnaafterRentshow = findViewById(R.id.khulnaafterRentshow);
-        View view2 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customtoast, null);
-        toast = new Toast(getApplicationContext());
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(view2);
-      FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        cash = FirebaseDatabase.getInstance().getReference().child("Cash");
-      String cashRunning = SharedPref.read("cash", "");
-        check = Integer.parseInt(cashRunning);
-        binding.khulna1hourRent.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                if (DhakaPlacesActivity.isRentedInDhaka) {
-                    Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
-                } else if (check <= 0) {
-                    toast.show();
-                    Log.d("Rate", +check + " " + cashnow);
-//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
-                } else {
-                    availSpots -= 1;
-                    rentedHours = "1 Hour";
-                   binding.khulnaplaceAvailablespots.setText(String.valueOf(availSpots));
-                    binding.khulnaselectedhour.setText(String.format(" %s", rentedHours));
-                    DhakaPlacesActivity.isRentedInDhaka = true;
-                    rent += 20;
-                    String cashBefore = SharedPref.read("cash", "");
-                    cashnow = Integer.parseInt(cashBefore);
-                    cash2 = cashnow - rent;
-                    String uid = firebaseUser.getUid();
-                    SharedPref.write("cash", String.valueOf(cash2));
-                    HashMap<String, Object> cashammount = new HashMap<>();
-                    cashammount.put("amount", cash2);
-                    binding.cashTextViewForKhulna.setText(String.valueOf(cash2));
-                    rent = 0;
-                    cash.child(uid).updateChildren(cashammount);
-                    khulnaafterRentshow.setVisibility(View.VISIBLE);
-                    DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.HOUR_OF_DAY, 1);
-                    binding.khulnafinishTime.setText(dateFormat.format(cal.getTime()));
-                    check = cash2;
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    binding = ActivityKhulnaPlacesBinding.inflate(getLayoutInflater());
+    View view = binding.getRoot();
+    setContentView(view);
 
-                }
+    SharedPref.init(this);
+    Spinner spin = findViewById(R.id.khulnaplacesSpinner);
+    spin.setOnItemSelectedListener(KhulnaPlacesActivity.this);
+    ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, places);
+    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spin.setAdapter(aa);
 
-            }
-        });
-        binding.khulna2hourRent.setOnClickListener(v -> {
-                setKhulna2hourRent();
-        });
-        binding.khulna2hourRent.setOnClickListener(v -> {
-            setKhulna3hourRent();
-        });
-        binding.khulna1hourRelease.setOnClickListener(v -> {
-            release1Hour();
-        });
+    khulnaafterRentshow = findViewById(R.id.khulnaafterRentshow);
+    View view2 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customtoast, null);
+    toast = new Toast(getApplicationContext());
+    toast.setDuration(Toast.LENGTH_LONG);
+    toast.setView(view2);
 
-    }
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    firebaseUser = firebaseAuth.getCurrentUser();
+    cash = FirebaseDatabase.getInstance().getReference().child("Cash");
 
-    public void setKhulna2hourRent() {
-        if (DhakaPlacesActivity.isRentedInDhaka) {
-
-            Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
-        } else if (check < 40) {
-            toast.show();
-            Log.d("Rate", +check + " " + cashnow);
-//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
-        } else {
-            availSpots -= 1;
-            rentedHours = "2 Hour";
-            binding.khulnaplaceAvailablespots.setText(String.valueOf(availSpots));
-            binding.khulnaselectedhour.setText(" " + rentedHours);
-            DhakaPlacesActivity.isRentedInDhaka = true;
-            rent += 40;
-            String cashBefore = SharedPref.read("cash", "");
-            cashnow = Integer.parseInt(cashBefore);
-            cash2 = cashnow - rent;
-            String uid = firebaseUser.getUid();
-            SharedPref.write("cash", String.valueOf(cash2));
-            HashMap<String, Object> cashammount = new HashMap<>();
-            cashammount.put("amount", cash2);
-            binding.cashTextViewForKhulna.setText(String.valueOf(cash2));
-            rent = 0;
-            cash.child(uid).updateChildren(cashammount);
-            khulnaafterRentshow.setVisibility(View.VISIBLE);
-            DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 2);
-            binding.khulnafinishTime.setText(dateFormat.format(cal.getTime()));
-            check = cash2;
-
+    // Fetch cash asynchronously from Firebase
+    String uid = firebaseUser.getUid();
+    cash.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        String cashRunning = SharedPref.read("cash", "");
+        if (dataSnapshot.exists()) {
+          cashnow = ((Long) dataSnapshot.child("amount").getValue()).intValue();
+          SharedPref.write("cash", String.valueOf(cashnow));
+          check = cashnow;
+          binding.cashTextViewForKhulna.setText(String.valueOf(cashnow));
         }
-    }
+      }
 
-    public void setKhulna3hourRent() {
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+        Log.e("FirebaseError", "Error fetching cash: " + databaseError.getMessage());
+      }
+    });
+
+    binding.khulna1hourRent.setOnClickListener(new View.OnClickListener() {
+      @RequiresApi(api = Build.VERSION_CODES.O)
+      @Override
+      public void onClick(View v) {
         if (DhakaPlacesActivity.isRentedInDhaka) {
-
-            Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
-        } else if (check < 60) {
-            toast.show();
-            Log.d("Rate", +check + " " + cashnow);
-//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
+          Toast.makeText(getApplicationContext(), "You have already rented a spot.", Toast.LENGTH_LONG).show();
+        } else if (check <= 0) {
+          toast.show();
+          Log.d("Rate", +check + " " + cashnow);
         } else {
-            availSpots -= 1;
-            rentedHours = "3 Hour";
-            binding.khulnaplaceAvailablespots.setText(String.valueOf(availSpots));
-            binding.khulnaselectedhour.setText(String.format(" %s", rentedHours));
-            DhakaPlacesActivity.isRentedInDhaka = true;
-            rent += 60;
-            String cashBefore = SharedPref.read("cash", "");
-            cashnow = Integer.parseInt(cashBefore);
-            cash2 = cashnow - rent;
-            String uid = firebaseUser.getUid();
-            SharedPref.write("cash", String.valueOf(cash2));
-            HashMap<String, Object> cashammount = new HashMap<>();
-            cashammount.put("amount", cash2);
-            binding.cashTextViewForKhulna.setText(String.valueOf(cash2));
-            rent = 0;
-            cash.child(uid).updateChildren(cashammount);
-            khulnaafterRentshow.setVisibility(View.VISIBLE);
-            DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 3);
-            binding.khulnafinishTime.setText(dateFormat.format(cal.getTime()));
-            check = cash2;
-
+          handleRent(1, 20);
         }
-    }
+      }
+    });
 
-    public void release1Hour() {
-        availSpots += 1;
-        binding.khulnaplaceAvailablespots.setText(String.valueOf(availSpots));
-        DhakaPlacesActivity.isRentedInDhaka = false;
-        khulnaafterRentshow.setVisibility(View.INVISIBLE);
-    }
+    binding.khulna2hourRent.setOnClickListener(v -> handleRent(2, 40));
+    binding.khulna3hourRent.setOnClickListener(v -> handleRent(3, 60));
+    binding.khulna1hourRelease.setOnClickListener(v -> release1Hour());
+  }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-      String selectedSpots = places[position];
-        binding.selectedspotinkhulna.setText(selectedSpots.toString());
-    }
+  private void handleRent(int hours, int rentCost) {
+    if (DhakaPlacesActivity.isRentedInDhaka) {
+      Toast.makeText(getApplicationContext(), "You have already rented a spot.", Toast.LENGTH_LONG).show();
+    } else if (check < rentCost) {
+      toast.show();
+      Log.d("Rate", "Insufficient cash: " + check + " " + cashnow);
+    } else {
+      availSpots -= 1;
+      rentedHours = hours + " Hour" + (hours > 1 ? "s" : "");
+      binding.khulnaplaceAvailablespots.setText(String.valueOf(availSpots));
+      binding.khulnaselectedhour.setText(" " + rentedHours);
+      DhakaPlacesActivity.isRentedInDhaka = true;
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+      rent += rentCost;
+      cash2 = cashnow - rent;
+      String uid = firebaseUser.getUid();
+      SharedPref.write("cash", String.valueOf(cash2));
 
+      HashMap<String, Object> cashAmount = new HashMap<>();
+      cashAmount.put("amount", cash2);
+      cash.child(uid).updateChildren(cashAmount);
+
+      binding.cashTextViewForKhulna.setText(String.valueOf(cash2));
+      rent = 0;
+      khulnaafterRentshow.setVisibility(View.VISIBLE);
+
+      DateFormat dateFormat = new SimpleDateFormat("h:mm a");
+      Calendar cal = Calendar.getInstance();
+      cal.add(Calendar.HOUR_OF_DAY, hours);
+      binding.khulnafinishTime.setText(dateFormat.format(cal.getTime()));
+      check = cash2;
     }
+  }
+
+  public void release1Hour() {
+    availSpots += 1;
+    binding.khulnaplaceAvailablespots.setText(String.valueOf(availSpots));
+    DhakaPlacesActivity.isRentedInDhaka = false;
+    khulnaafterRentshow.setVisibility(View.INVISIBLE);
+  }
+
+  @Override
+  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    String selectedSpot = places[position];
+    binding.selectedspotinkhulna.setText(selectedSpot);
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> parent) {
+    // No-op
+  }
 }

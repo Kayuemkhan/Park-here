@@ -16,8 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import code.fortomorrow.parkhere.databinding.ActivityRajshahiPlacesBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -39,20 +43,19 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
     private int check = 0;
     private Toast toast;
     private Spinner spin;
-    ActivityRajshahiPlacesBinding binding ;
+    ActivityRajshahiPlacesBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRajshahiPlacesBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-
         setContentView(view);
 
         SharedPref.init(this);
         spin = findViewById(R.id.rajshahiplacesSpinner);
         spin.setOnItemSelectedListener(RajshahiPlacesActivity.this);
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, places);
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, places);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
         rajshahiafterRentshow = findViewById(R.id.rajshahiafterrentShow);
@@ -64,8 +67,9 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         firebaseUser = firebaseAuth.getCurrentUser();
         binding.cashTextViewRajshahi.setText(SharedPref.read("cash", ""));
         cash = FirebaseDatabase.getInstance().getReference().child("Cash");
-        cashRunning = SharedPref.read("cash", "");
-        check = Integer.parseInt(cashRunning);
+
+        fetchCashAmount();
+
         binding.rajsahhi2hourRent.setOnClickListener(v -> setRajshahi2hourRen());
         binding.rajshahi3hourRent.setOnClickListener(v -> setRajshahi3hourRen());
         binding.rajshahi1hourRelease.setOnClickListener(v -> release1Hour());
@@ -75,114 +79,99 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
             @Override
             public void onClick(View v) {
                 if (DhakaPlacesActivity.isRentedInDhaka) {
-                    Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "You Have Already Rented a Slot", Toast.LENGTH_LONG).show();
                 } else if (check <= 0) {
                     toast.show();
                     Log.d("Rate", +check + " " + cashnow);
-//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
                 } else {
-                    availSpots -= 1;
-                    rentedHours = "1 Hour";
-                    binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
-                    binding.rajshahiselectedhour.setText(" " + rentedHours);
-                    DhakaPlacesActivity.isRentedInDhaka = true;
-                    rent += 20;
-                    String cashBefore = SharedPref.read("cash", "");
-                    cashnow = Integer.parseInt(cashBefore);
-                    cash2 = cashnow - rent;
-                    String uid = firebaseUser.getUid();
-                    SharedPref.write("cash", String.valueOf(cash2));
-                    HashMap<String, Object> cashammount = new HashMap<>();
-                    cashammount.put("amount", cash2);
-                    binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
-                    rent = 0;
-                    cash.child(uid).updateChildren(cashammount);
-                    rajshahiafterRentshow.setVisibility(View.VISIBLE);
-                    DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.HOUR_OF_DAY, 1);
-                    binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
-                    check = cash2;
-
+                    processRent(1, 20);
                 }
-
             }
         });
     }
 
+    private void fetchCashAmount() {
+        String uid = firebaseUser.getUid();
+        cash.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    cashRunning = snapshot.child("amount").getValue(String.class);
+                    check = Integer.parseInt(cashRunning);
+                    binding.cashTextViewRajshahi.setText(cashRunning);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.e("FirebaseError", error.getMessage());
+            }
+        });
+    }
+
+    private void processRent(int hours, int rentAmount) {
+        availSpots = Math.max(0, availSpots - 1); // Prevent negative spots
+        rentedHours = hours + " Hour";
+        binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
+        binding.rajshahiselectedhour.setText(rentedHours);
+        DhakaPlacesActivity.isRentedInDhaka = true;
+        rent += rentAmount;
+        cashnow = check;
+        cash2 = cashnow - rent;
+        updateCash();
+        updateRentUI(hours);
+    }
+
+    private void updateCash() {
+        String uid = firebaseUser.getUid();
+        SharedPref.write("cash", String.valueOf(cash2));
+        HashMap<String, Object> cashAmount = new HashMap<>();
+        cashAmount.put("amount", cash2);
+        binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
+        rent = 0;
+
+        cash.child(uid).updateChildren(cashAmount).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d("Firebase", "Cash updated successfully");
+            } else {
+                Log.e("FirebaseError", "Failed to update cash");
+            }
+        });
+    }
+
+    private void updateRentUI(int hours) {
+        rajshahiafterRentshow.setVisibility(View.VISIBLE);
+        DateFormat dateFormat = new SimpleDateFormat("h:mm a");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR_OF_DAY, hours);
+        binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
+        check = cash2;
+    }
+
     public void setRajshahi2hourRen() {
         if (DhakaPlacesActivity.isRentedInDhaka) {
-
-            Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "You Have Already Rented a Slot", Toast.LENGTH_LONG).show();
         } else if (check < 40) {
             toast.show();
             Log.d("Rate", +check + " " + cashnow);
-//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         } else {
-            availSpots -= 1;
-            rentedHours = "2 Hour";
-            binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
-            binding.rajshahiselectedhour.setText(" " + rentedHours);
-            DhakaPlacesActivity.isRentedInDhaka = true;
-            rent += 40;
-            String cashBefore = SharedPref.read("cash", "");
-            cashnow = Integer.parseInt(cashBefore);
-            cash2 = cashnow - rent;
-            String uid = firebaseUser.getUid();
-            SharedPref.write("cash", String.valueOf(cash2));
-            HashMap<String, Object> cashammount = new HashMap<>();
-            cashammount.put("amount", cash2);
-            binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
-            rent = 0;
-            cash.child(uid).updateChildren(cashammount);
-            rajshahiafterRentshow.setVisibility(View.VISIBLE);
-            DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 2);
-            binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
-            check = cash2;
-
+            processRent(2, 40);
         }
     }
 
     public void setRajshahi3hourRen() {
         if (DhakaPlacesActivity.isRentedInDhaka) {
-
-            Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "You Have Already Rented a Slot", Toast.LENGTH_LONG).show();
         } else if (check < 60) {
             toast.show();
             Log.d("Rate", +check + " " + cashnow);
-//                    Toast.makeText(getApplicationContext(),"You Don't have enough Cash",Toast.LENGTH_LONG).show();
         } else {
-            availSpots -= 1;
-            rentedHours = "3 Hour";
-            binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
-            binding.rajshahiselectedhour.setText(" " + rentedHours);
-            DhakaPlacesActivity.isRentedInDhaka = true;
-            rent += 60;
-            String cashBefore = SharedPref.read("cash", "");
-            cashnow = Integer.parseInt(cashBefore);
-            cash2 = cashnow - rent;
-            String uid = firebaseUser.getUid();
-            SharedPref.write("cash", String.valueOf(cash2));
-            HashMap<String, Object> cashammount = new HashMap<>();
-            cashammount.put("amount", cash2);
-            binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
-            rent = 0;
-            cash.child(uid).updateChildren(cashammount);
-            rajshahiafterRentshow.setVisibility(View.VISIBLE);
-            DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.HOUR_OF_DAY, 3);
-            binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
-            check = cash2;
-
+            processRent(3, 60);
         }
     }
 
-
     public void release1Hour() {
-        availSpots += 1;
+        availSpots = Math.min(2, availSpots + 1); // Prevent exceeding original spots
         binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
         DhakaPlacesActivity.isRentedInDhaka = false;
         rajshahiafterRentshow.setVisibility(View.INVISIBLE);
@@ -191,7 +180,7 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         selectedSpots = places[position];
-        binding.selectedspotinRajshahi.setText(selectedSpots.toString());
+        binding.selectedspotinRajshahi.setText(selectedSpots);
     }
 
     @Override

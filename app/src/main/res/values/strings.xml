@@ -11,8 +11,10 @@
     <string name="_2_hour">2 Hour\n $40</string>
     <string name="_3_hour">3 Hour\n $60</string>
     <string name="easiest">Easiest Way \nFind Your Parking</string>
+  <string name="credit">Credit : ৳</string>
+  <string name="you_have_rent_for">You have rent for</string>
 
-    <string-array name="places">
+  <string-array name="places">
         <item>Kallanpur</item>
         <item>Mirpur</item>
         <item>Nikonjo</item>

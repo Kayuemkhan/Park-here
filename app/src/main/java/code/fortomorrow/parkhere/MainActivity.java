@@ -1,19 +1,14 @@
 package code.fortomorrow.parkhere;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import code.fortomorrow.parkhere.databinding.ActivityMainBinding;
+import code.fortomorrow.parkhere.model.Cash;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,38 +17,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import code.fortomorrow.parkhere.model.Cash;
-
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.cashTextView)
-    public TextView cashTextview;
-    DatabaseReference cashtext;
-    FirebaseAuth auth= FirebaseAuth.getInstance();
-    FirebaseUser user = auth.getCurrentUser();
+
+    private DatabaseReference cashtext;
+    private FirebaseAuth auth= FirebaseAuth.getInstance();
+    private FirebaseUser user = auth.getCurrentUser();
     private String currentId = user.getUid();
     private RadioGroup radioGroup;
-    String text;
-    @BindView(R.id.dhakaplace)
-    public TextView dhakaplace;
-    @BindView(R.id.khulnaplace)
-    public TextView khulnaPlace;
-    @BindView(R.id.rajshahiid)
-    public TextView rajshahiId;
-    @BindView(R.id.chittagongplace)
-    public TextView chittagongplace;
+    private String text;
+    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        setContentView(view);
         cashtext = FirebaseDatabase.getInstance().getReference().child("Cash").child(currentId);
         dataset();
-        ButterKnife.bind(this);
         SharedPref.init(this);
-
+        binding.dhakaplace.setOnClickListener(v -> dhakaplaceclick());
+        binding.chittagongplace.setOnClickListener(v -> chittagongplaceclick());
+        binding.khulnaplace.setOnClickListener(v -> khulnaplaceclick());
+        binding.rajshahiid.setOnClickListener(v -> rajshahiPlaceclick());
     }
 
     private void dataset() {
@@ -64,12 +52,9 @@ public class MainActivity extends AppCompatActivity {
                     Cash cash = snapshot.getValue(Cash.class);
                     String cashvalue= cash.getAmount().toString();
                     SharedPref.write("cash",cashvalue);
-                    cashTextview.setText(cashvalue);
-//                    cashTextview.setText(SharedPref.read("cash",""));
+                    binding.cashTextView.setText(cashvalue);
                 }
-                else {
 
-                }
             }
 
             @Override
@@ -78,29 +63,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    @SuppressLint("ResourceAsColor")
-    @OnClick(R.id.dhakaplace)
     void dhakaplaceclick(){
 
         startActivity(new Intent(getApplicationContext(),DhakaPlacesActivity.class));
 
     }
     @SuppressLint("ResourceAsColor")
-    @OnClick(R.id.chittagongplace)
     void chittagongplaceclick(){
 
         startActivity(new Intent(getApplicationContext(),ChittagongPlacesActivity.class));
 
     }
     @SuppressLint("ResourceAsColor")
-    @OnClick(R.id.khulnaplace)
     void khulnaplaceclick(){
 
         startActivity(new Intent(getApplicationContext(),KhulnaPlacesActivity.class));
 
     }
     @SuppressLint("ResourceAsColor")
-    @OnClick(R.id.rajshahiid)
     void rajshahiPlaceclick(){
 
         startActivity(new Intent(getApplicationContext(),RajshahiPlacesActivity.class));

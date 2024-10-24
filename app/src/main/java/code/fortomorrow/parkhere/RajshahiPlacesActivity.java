@@ -1,8 +1,5 @@
 package code.fortomorrow.parkhere;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,46 +10,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import code.fortomorrow.parkhere.databinding.ActivityRajshahiPlacesBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class RajshahiPlacesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    @BindView(R.id.cashTextViewRajshahi)
-    TextView cashTextViewRajshahi;
-    @BindView(R.id.rajshahiplaceAvailablespots)
-    TextView rajshahiplaceAvailablespots;
-    @BindView(R.id.rajshahi1hourRent)
-    TextView rajshahi1hourRent;
-    @BindView(R.id.rajsahhi2hourRent)
-    TextView rajshahi2hourRent;
-    @BindView(R.id.rajshahi3hourRent)
-    TextView rajshahi3hourRent;
-    @BindView(R.id.rajshahiselectedhour)
-    TextView rajshahiselectedhour;
-    @BindView(R.id.rajshahifinishTime)
-    TextView rajshahifinishTime;
-    @BindView(R.id.rajshahi1hourRelease)
-    TextView rajshahi1hourRelease;
-    @BindView(R.id.selectedspotinRajshahi)
-    TextView selectedspotinRajshahi;
+
     LinearLayout rajshahiafterRentshow;
     private String rentedHours;
     private int availSpots = 2;
     private String selectedSpots;
-    private String[] places = {"RUET Campus", "RU Campus", "Bagha Mosque"};
+    private final String[] places = {"RUET Campus", "RU Campus", "Bagha Mosque"};
     private int rent = 0;
     private int cash2 = 0;
     private int cashnow;
@@ -63,12 +39,16 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
     private int check = 0;
     private Toast toast;
     private Spinner spin;
+    ActivityRajshahiPlacesBinding binding ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rajshahi_places);
-        ButterKnife.bind(this);
+        binding = ActivityRajshahiPlacesBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        setContentView(view);
+
         SharedPref.init(this);
         spin = findViewById(R.id.rajshahiplacesSpinner);
         spin.setOnItemSelectedListener(RajshahiPlacesActivity.this);
@@ -82,16 +62,19 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         toast.setView(view);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        cashTextViewRajshahi = findViewById(R.id.cashTextViewRajshahi);
-        cashTextViewRajshahi.setText(SharedPref.read("cash", ""));
+        binding.cashTextViewRajshahi.setText(SharedPref.read("cash", ""));
         cash = FirebaseDatabase.getInstance().getReference().child("Cash");
         cashRunning = SharedPref.read("cash", "");
         check = Integer.parseInt(cashRunning);
-        rajshahi1hourRent.setOnClickListener(new View.OnClickListener() {
+        binding.rajsahhi2hourRent.setOnClickListener(v -> setRajshahi2hourRen());
+        binding.rajshahi3hourRent.setOnClickListener(v -> setRajshahi3hourRen());
+        binding.rajshahi1hourRelease.setOnClickListener(v -> release1Hour());
+
+        binding.rajshahi1hourRent.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                if (DhakaPlacesActivity.isRentedInDhaka == true) {
+                if (DhakaPlacesActivity.isRentedInDhaka) {
                     Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
                 } else if (check <= 0) {
                     toast.show();
@@ -100,8 +83,8 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
                 } else {
                     availSpots -= 1;
                     rentedHours = "1 Hour";
-                    rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
-                    rajshahiselectedhour.setText(" " + rentedHours);
+                    binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
+                    binding.rajshahiselectedhour.setText(" " + rentedHours);
                     DhakaPlacesActivity.isRentedInDhaka = true;
                     rent += 20;
                     String cashBefore = SharedPref.read("cash", "");
@@ -111,14 +94,14 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
                     SharedPref.write("cash", String.valueOf(cash2));
                     HashMap<String, Object> cashammount = new HashMap<>();
                     cashammount.put("amount", cash2);
-                    cashTextViewRajshahi.setText(String.valueOf(cash2));
+                    binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
                     rent = 0;
                     cash.child(uid).updateChildren(cashammount);
                     rajshahiafterRentshow.setVisibility(View.VISIBLE);
                     DateFormat dateFormat = new SimpleDateFormat("h:mm a");
                     Calendar cal = Calendar.getInstance();
                     cal.add(Calendar.HOUR_OF_DAY, 1);
-                    rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
+                    binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
                     check = cash2;
 
                 }
@@ -127,10 +110,8 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @OnClick(R.id.rajsahhi2hourRent)
     public void setRajshahi2hourRen() {
-        if (DhakaPlacesActivity.isRentedInDhaka == true) {
+        if (DhakaPlacesActivity.isRentedInDhaka) {
 
             Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
         } else if (check < 40) {
@@ -140,8 +121,8 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         } else {
             availSpots -= 1;
             rentedHours = "2 Hour";
-            rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
-            rajshahiselectedhour.setText(" " + rentedHours);
+            binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
+            binding.rajshahiselectedhour.setText(" " + rentedHours);
             DhakaPlacesActivity.isRentedInDhaka = true;
             rent += 40;
             String cashBefore = SharedPref.read("cash", "");
@@ -151,23 +132,21 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
             SharedPref.write("cash", String.valueOf(cash2));
             HashMap<String, Object> cashammount = new HashMap<>();
             cashammount.put("amount", cash2);
-            cashTextViewRajshahi.setText(String.valueOf(cash2));
+            binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
             rent = 0;
             cash.child(uid).updateChildren(cashammount);
             rajshahiafterRentshow.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.HOUR_OF_DAY, 2);
-            rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
+            binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
 
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @OnClick(R.id.rajshahi3hourRent)
     public void setRajshahi3hourRen() {
-        if (DhakaPlacesActivity.isRentedInDhaka == true) {
+        if (DhakaPlacesActivity.isRentedInDhaka) {
 
             Toast.makeText(getApplicationContext(), "You Have Already Rent a slot", Toast.LENGTH_LONG).show();
         } else if (check < 60) {
@@ -177,8 +156,8 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         } else {
             availSpots -= 1;
             rentedHours = "3 Hour";
-            rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
-            rajshahiselectedhour.setText(" " + rentedHours);
+            binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
+            binding.rajshahiselectedhour.setText(" " + rentedHours);
             DhakaPlacesActivity.isRentedInDhaka = true;
             rent += 60;
             String cashBefore = SharedPref.read("cash", "");
@@ -188,24 +167,23 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
             SharedPref.write("cash", String.valueOf(cash2));
             HashMap<String, Object> cashammount = new HashMap<>();
             cashammount.put("amount", cash2);
-            cashTextViewRajshahi.setText(String.valueOf(cash2));
+            binding.cashTextViewRajshahi.setText(String.valueOf(cash2));
             rent = 0;
             cash.child(uid).updateChildren(cashammount);
             rajshahiafterRentshow.setVisibility(View.VISIBLE);
             DateFormat dateFormat = new SimpleDateFormat("h:mm a");
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.HOUR_OF_DAY, 3);
-            rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
+            binding.rajshahifinishTime.setText(dateFormat.format(cal.getTime()));
             check = cash2;
 
         }
     }
 
 
-    @OnClick(R.id.rajshahi1hourRelease)
     public void release1Hour() {
         availSpots += 1;
-        rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
+        binding.rajshahiplaceAvailablespots.setText(String.valueOf(availSpots));
         DhakaPlacesActivity.isRentedInDhaka = false;
         rajshahiafterRentshow.setVisibility(View.INVISIBLE);
     }
@@ -213,7 +191,7 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         selectedSpots = places[position];
-        selectedspotinRajshahi.setText(selectedSpots.toString());
+        binding.selectedspotinRajshahi.setText(selectedSpots.toString());
     }
 
     @Override

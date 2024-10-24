@@ -3,7 +3,6 @@ package code.fortomorrow.parkhere;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import code.fortomorrow.parkhere.databinding.ActivityLaunchBinding;
 
@@ -22,7 +21,6 @@ public class LaunchActivity extends AppCompatActivity {
   }
 
   public void buttonLogin() {
-    Toast.makeText(this, "Showing Toast", Toast.LENGTH_SHORT).show();
     startActivity(new Intent(LaunchActivity.this, LoginActivity.class));
     finish();
   }

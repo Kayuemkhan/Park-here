@@ -56,10 +56,10 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
         rajshahiafterRentshow = findViewById(R.id.rajshahiafterrentShow);
-        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customtoast, null);
+        View view2 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customtoast, null);
         toast = new Toast(getApplicationContext());
         toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(view);
+        toast.setView(view2);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         binding.cashTextViewRajshahi.setText(SharedPref.read("cash", ""));

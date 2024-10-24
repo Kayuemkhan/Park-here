@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:padding="@dimen/_10sdp"
     android:orientation="vertical"
 
     tools:context=".ChittagongPlacesActivity">
@@ -90,7 +89,8 @@
             android:padding="20dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="Spots"
@@ -100,9 +100,10 @@
                 />
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -140,7 +141,8 @@
             android:padding="20dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="Opening - Mon- Sun  "
@@ -148,6 +150,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

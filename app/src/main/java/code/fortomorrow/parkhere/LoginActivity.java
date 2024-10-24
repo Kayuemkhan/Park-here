@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-
-
     private ProgressDialog loadingBar1;
     private FirebaseAuth mAuth;
 
@@ -61,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    System.out.println("taskkk");
+                    System.out.println(task);
 
                     FirebaseUser user = mAuth.getCurrentUser();
 

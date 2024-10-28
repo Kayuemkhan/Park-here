@@ -67,8 +67,11 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
     cash.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot snapshot) {
-        String cashValue = snapshot.child("amount").getValue(String.class);
-        check = cashValue != null ? Integer.parseInt(cashValue) : 0;
+        //String cashValue = snapshot.child("amount").getValue(String.class);
+        cashnow = ((Long) snapshot.child("amount").getValue()).intValue();
+        SharedPref.write("cash", String.valueOf(cashnow));
+
+        check =cashnow ;
         binding.cashTextViewForChittagong.setText(String.valueOf(check));
       }
 

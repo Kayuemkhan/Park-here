@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <!-- Place Selection Prompt -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,93 +67,18 @@
         android:textStyle="bold" />
 
     <!-- Card View for Place Selection -->
-    <androidx.cardview.widget.CardView
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/rvDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:backgroundTint="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="8dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="8dp">
-
-            <!-- First Row of Places -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:weightSum="2">
-
-                <TextView
-                    android:id="@+id/dhakaplace"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="16dp"
-                    android:background="@drawable/gradiantcolorbackground"
-                    android:gravity="center"
-                    android:text="@string/dhaka"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/chittagongplace"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="16dp"
-                    android:background="@drawable/gradiantcolorbackground"
-                    android:gravity="center"
-                    android:text="@string/chittagong"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Second Row of Places -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:weightSum="2">
-
-                <TextView
-                    android:id="@+id/khulnaplace"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="16dp"
-                    android:background="@drawable/gradiantcolorbackground"
-                    android:gravity="center"
-                    android:text="@string/khulna"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/rajshahiid"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="16dp"
-                    android:background="@drawable/gradiantcolorbackground"
-                    android:gravity="center"
-                    android:text="@string/rajshahi"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/row_dashboard"
+        />
 
 </LinearLayout>

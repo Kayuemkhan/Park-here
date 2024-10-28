@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPref {
-    public static final String SHARED_PREF_MAIN="shared_preference_main";
     private static SharedPreferences mSharedPref;
     public static final String NAME = "com.bdtask.waiters";
 
@@ -25,6 +24,6 @@ public class SharedPref {
     public static void write(String key, String value) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putString(key, value);
-        prefsEditor.commit();
+        prefsEditor.apply();
     }
 }

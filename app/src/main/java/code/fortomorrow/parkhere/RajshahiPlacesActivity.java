@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import code.fortomorrow.parkhere.databinding.ActivityRajshahiPlacesBinding;
@@ -94,11 +95,13 @@ public class RajshahiPlacesActivity extends AppCompatActivity implements Adapter
         String uid = firebaseUser.getUid();
         cash.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    cashRunning = snapshot.child("amount").getValue(String.class);
-                    check = Integer.parseInt(cashRunning);
-                    binding.cashTextViewRajshahi.setText(cashRunning);
+                    cashnow = ((Long) snapshot.child("amount").getValue()).intValue();
+                    SharedPref.write("cash", String.valueOf(cashnow));
+
+                    check = cashnow;
+                    binding.cashTextViewRajshahi.setText(String.valueOf(check));
                 }
             }
 

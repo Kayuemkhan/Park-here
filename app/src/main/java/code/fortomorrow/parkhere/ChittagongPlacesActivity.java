@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import code.fortomorrow.parkhere.databinding.ActivityChittagongPlacesBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ChittagongPlacesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
   private ActivityChittagongPlacesBinding binding;
@@ -66,9 +68,9 @@ public class ChittagongPlacesActivity extends AppCompatActivity implements Adapt
     String uid = firebaseUser.getUid();
     cash.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
-      public void onDataChange(DataSnapshot snapshot) {
+      public void onDataChange(@NonNull DataSnapshot snapshot) {
         //String cashValue = snapshot.child("amount").getValue(String.class);
-        cashnow = ((Long) snapshot.child("amount").getValue()).intValue();
+        cashnow = ((Long) Objects.requireNonNull(snapshot.child("amount").getValue())).intValue();
         SharedPref.write("cash", String.valueOf(cashnow));
 
         check =cashnow ;

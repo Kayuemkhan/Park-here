@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/app_name"
-            android:textColor="@color/best"
+            android:textColor="@color/colorSecondary"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -45,14 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Credit : ৳"
-            android:textColor="@color/best"
+            android:textColor="@color/colorSecondary"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/cashTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/best"
+            android:textColor="@color/colorSecondary"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -166,7 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Choose Your Time"
-        android:textColor="@color/best"
+        android:textColor="@color/colorSecondary"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -273,7 +273,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/you_have_rent_for"
-                    android:textColor="@color/best2"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_18sdp" />
 
                 <TextView
@@ -281,7 +281,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 1 Hour"
-                    android:textColor="@color/best2"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_18sdp" />
             </LinearLayout>
 
@@ -295,14 +295,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Your time will be finish at :"
-                    android:textColor="@color/best" />
+                    android:textColor="@color/colorSecondary" />
 
                 <TextView
                     android:id="@+id/dhakafinishTime"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="4.00 PM"
-                    android:textColor="@color/best" />
+                    android:textColor="@color/colorSecondary" />
             </LinearLayout>
 
             <TextView
